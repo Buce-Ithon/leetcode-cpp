@@ -39,18 +39,18 @@ public:
     int lengthOfLIS(std::vector<int> &nums) {
         int n = static_cast<int>(nums.size());
 
-        std::vector<int> LIS(n, 1);
+        std::vector<int> LIS(static_cast<size_t>(n), 1);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
-                if (nums[j] < nums[i]) {
-                    LIS[i] = std::max(1 + LIS[j], LIS[i]);
+                if (nums[static_cast<size_t>(j)] < nums[static_cast<size_t>(i)]) {
+                    LIS[static_cast<size_t>(i)] = std::max(1 + LIS[static_cast<size_t>(j)], LIS[static_cast<size_t>(i)]);
                 }
             }
         }
         int sol = 0;
         for (int k = 0; k < n; k++) {
-            sol = std::max(sol, LIS[k]);
+            sol = std::max(sol, LIS[static_cast<size_t>(k)]);
         }
         return sol;
     }
