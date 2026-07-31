@@ -39,26 +39,26 @@ public:
     std::vector<int> largestDivisibleSubset(std::vector<int>& nums) {
         // 1. Sort the input array for convenience of comparison and calculating
         std::sort(nums.begin(), nums.end());
-        int n = static_cast<int>(nums.size());
+        std::size_t n = nums.size();
         // 2. Create dp[n]: used to record the LDS of the current index in every traverse state
-        std::vector<int> dp(n,1);
+        std::vector<int> dp(static_cast<std::size_t>(n),1);
         // 3. Create prev[n]: used to record the index sequence of the LDS of the current index in every traverse state
-        std::vector<int> prev(n,-1);
+        std::vector<int> prev(static_cast<std::size_t>(n),-1);
         // 4. Recording the final LDS of whole indexs
-        int maxi = 0;
+        std::size_t maxi = 0;
         // 5. The process of DP
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
+        for (std::size_t i = 0; i < n; i++) {
+            for (std::size_t j = 0; j < i; j++) {
                 if (nums[i] % nums[j] == 0 && dp[i] <= dp[j] + 1) {
                     dp[i] = dp[j] + 1;
-                    prev[i] = j;
+                    prev[i] = static_cast<int>(j);
                 }
             }
             if (dp[i] > dp[maxi]) maxi = i;
         }
         // 6. Push bakc elements into the ans according to the index recorded by prev[n]
         std::vector<int> ans;
-        for (int i = maxi; i != -1; i = prev[i]) {
+        for (std::size_t i = maxi; i != static_cast<std::size_t>(-1); i = static_cast<std::size_t>(prev[i])) {
             ans.push_back(nums[i]);
         }
         std::reverse(ans.begin(), ans.end());
