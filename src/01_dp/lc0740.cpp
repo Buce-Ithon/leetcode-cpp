@@ -57,9 +57,9 @@ public:
         }
 
         // 2. Aggregate the total points earned by picking each value
-        std::vector<int> sum(max_val + 1, 0);
+        std::vector<int> sum(static_cast<std::size_t>(max_val) + 1, 0);
         for (int num : nums) {
-            sum[num] += num;
+            sum[static_cast<std::size_t>(num)] += num;
         }
 
         // 3. Dynamic Programming (equivalent to House Robber problem)
@@ -69,7 +69,7 @@ public:
         int second = std::max(sum[0], sum[1]);
 
         for (int i = 2; i <= max_val; ++i) {
-            int current = std::max(second, first + sum[i]);
+            int current = std::max(second, first + sum[static_cast<std::size_t>(i)]);
             first = second;
             second = current;
         }
