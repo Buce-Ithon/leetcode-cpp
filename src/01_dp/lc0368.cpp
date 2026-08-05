@@ -56,7 +56,7 @@ public:
             }
             if (dp[i] > dp[maxi]) maxi = i;
         }
-        // 6. Push bakc elements into the ans according to the index recorded by prev[n]
+        // 6. Push back elements into the and according to the index recorded by prev[n]
         std::vector<int> ans;
         for (std::size_t i = maxi; i != static_cast<std::size_t>(-1); i = static_cast<std::size_t>(prev[i])) {
             ans.push_back(nums[i]);
