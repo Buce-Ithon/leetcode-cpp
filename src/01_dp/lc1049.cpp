@@ -41,17 +41,17 @@ public:
         int target = sum / 2;
 
         // dp[j] represents the maximum weight capacity we can pack into a knapsack of target 'j'
-        std::vector<int> dp(target + 1, 0);
+        std::vector<int> dp(static_cast<std::size_t>(target + 1), 0);
 
         for (int stone : stones) {
             // Reverse iteration to avoid reusing the same stone multiple times
             for (int j = target; j >= stone; --j) {
-                dp[j] = std::max(dp[j], dp[j - stone] + stone);
+                dp[static_cast<std::size_t>(j)] = std::max(dp[static_cast<std::size_t>(j)], dp[static_cast<std::size_t>(j - stone)] + stone);
             }
         }
 
         // Total sum minus twice the best possible subset sum yields the minimum difference
-        return sum - 2 * dp[target];
+        return sum - 2 * dp[static_cast<std::size_t>(target)];
     }
 };
 
